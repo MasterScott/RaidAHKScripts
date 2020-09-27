@@ -1,0 +1,89 @@
+^!z::  ; Control+Alt+Z hotkey.
+; Automate level up on in Sparring Pit for Raid:Shadow Legends
+
+CoordMode, Mouse, Window ; Set mouse environment
+
+Loop 
+{
+	if WinExist("Raid: Shadow Legends")
+	{
+		; Declarations 
+		pitPixelColor1 := 0x000000
+		pitPixelColor2 := 0x000000
+		pitPixelColor3 := 0x000000
+		pitPixelColor4 := 0x000000
+		pitPixelColor5 := 0x000000
+		
+		WinActivate
+		
+		MouseMove, 15, 50
+		
+		; Check status of each character in the pit and level if necessary		
+		if WinActive("Raid: Shadow Legends")
+		{
+			PixelGetColor, pitPixelColor1, 161, 1635
+			if pitPixelColor1 = 0x0073B1
+			{
+				MouseClick, left, 161, 1635
+				Sleep, 1000
+			}
+
+			PixelGetColor, pitPixelColor2, 956, 1628
+			if pitPixelColor2 = 0x0073B1
+			{
+				MouseClick, left, 956, 1628
+				Sleep, 1000
+			}
+
+			PixelGetColor, pitPixelColor3, 1659, 1635
+			if pitPixelColor3 = 0x0073B1
+			{
+				MouseClick, left, 1659, 1635
+				Sleep, 1000
+			}
+
+			PixelGetColor, pitPixelColor4, 2452, 1637
+			if pitPixelColor4 = 0x0073B1
+			{
+				MouseClick, left, 2452, 1637
+				Sleep, 1000
+			}
+
+			PixelGetColor, pitPixelColor5, 3202, 1633
+			if pitPixelColor5 = 0x0073B1
+			{
+				MouseClick, left, 3202, 1633
+				Sleep, 1000
+			}
+		}
+		else
+			Exit ; Terminate if Raid: Shadow Legends is not the active window
+	}
+	else
+		Exit ; Terminate if Raid: Shadow Legends is not running
+	MsgBox, 4, , Continue running training script? Script will continue automatically after 60 seconds, 60 ; 60-second timeout
+	IfMsgBox, No
+	{
+		MsgBox, Raid Training Script stopped
+		Exit ; Terminate on user selection
+	}
+}
+return
+
+
+^!g::  ; Control+Alt+g hotkey.
+; Get current mouse position and pixel color.
+
+CoordMode, Mouse, Window ; Set mouse environment
+
+	; Declarations
+	mousePosX := 0
+	mousePosY := 0
+	pixelColor := 0x000000
+
+	MouseGetPos mousePosX, mousePosY
+	PixelGetColor pixelColor, mousePosX, mousePosY
+
+	MsgBox, The mouse position is %mousePosX%, %mousePosY%. `n The pixel color at that position is %pixelColor%.
+
+return
