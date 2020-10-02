@@ -115,7 +115,7 @@ Loop
 		; Continue dungeon run		
 		if WinActive("Raid: Shadow Legends")
 		{
-			PixelGetColor, dungeonpixelColor, 2139, 1967
+			PixelGetColor, dungeonPixelColor, 2139, 1967
 				
 			if dungeonPixelColor = 0x947000
 			{
@@ -127,8 +127,20 @@ Loop
 				}
 				
 				MouseClick, left, 2139, 1967
-				Sleep 1000
 			}
+			else 
+			{
+				; Check for out of energy message and terminate if necessary
+				
+				PixelGetColor, dungeonPixelColor, 1660, 1493		
+		
+				if dungeonPixelColor = 0x0581B9
+				{
+					MsgBox, 0, , Not enough energy remaining. Dungeon runs cancelled.
+					Exit ; Terminate run
+				}
+			}
+			Sleep 1000
 		}
 		else
 			Exit ; Terminate if Raid: Shadow Legends is not the active window
@@ -156,18 +168,3 @@ CoordMode, Mouse, Window ; Set mouse environment
 	MsgBox, The mouse position is %mousePosX%, %mousePosY%. `n The pixel color at that position is %pixelColor%.
 
 return
-	
-; Useful coordinate and pixel color info
-
-; Team Selection page
-; Coords = 3369, 1948
-; pixel color = 0x0073B1
-
-; Rerun dungeon
-; Coords = 2139, 1967
-; pixel color = 0x8E6C00
-
-; Check for auto run
-; Coords = 192, 1933
-; pixel color = 0xFFF371
-
