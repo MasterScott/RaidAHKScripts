@@ -1,4 +1,4 @@
-^!z::  ; Control+Alt+Z hotkey.
+^!s::  ; Control+Alt+s hotkey.
 ; Automate level up on in Sparring Pit for Raid:Shadow Legends
 
 CoordMode, Mouse, Window ; Set mouse environment
